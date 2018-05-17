@@ -12,14 +12,14 @@ const MapCanvas = compose(
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?AIzaSyCejQoXsMW6FestdxLCiM4uCny49qz5rHc&v=3.exp&libraries=geometry,drawing,places',
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `90vh` }} />,
+    containerElement: <div style={{ height: `80vh` }} />,
     mapElement: <div style={{ height: `100%` }} />
   }),
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
-    <Marker position={{ lat: -34.397, lng: 150.644 }} />
+  <GoogleMap defaultZoom={13} defaultCenter={{ lat: 56.488, lng: 84.98 }}>
+    <Marker position={{ lat: 56.488, lng: 84.98 }} />
   </GoogleMap>
 ));
 

@@ -1,0 +1,28 @@
+.copy {
+  font-size: 1rem;
+  margin: 0 auto;
+  width: 90%;
+  border-top: 1px black solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  margin-left: 2%;
+}
+
+.social {
+  font-size: 2rem;
+  margin-right: 2%;
+}
+
+.social a:hover {
+  color: #50f;
+}
+
+@media screen and (max-width: 700px) {
+  .copy {
+    flex-flow: column;
+  }
+}

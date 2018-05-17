@@ -5,7 +5,6 @@ class Map extends React.Component {
   render() {
     return (
       <div>
-        Map Template
         <MapCanvas />
       </div>
     );
