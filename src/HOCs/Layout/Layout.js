@@ -5,6 +5,8 @@ import './Layout.css';
 // import Toolbar from '../Navigation/Toolbar/Toolbar';
 // import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 import Footer from '../../components/Footer/Footer';
+import List from '../../components/List/List';
+import Header from '../../components/Header';
 
 class Layout extends Component {
   state = {
@@ -24,14 +26,13 @@ class Layout extends Component {
   render() {
     return (
       <Aux>
-        <header className="App-header">
-          <div className="Burger">Sidedrawer</div>
-          <div className="Title">
-            <h1 className="App-title">Guide to Siberian cities</h1>
-          </div>
-        </header>
+        <Header />
 
         <main className="Content">{this.props.children}</main>
+
+        <aside>
+          <List places={this.props.places} />
+        </aside>
 
         <Footer />
       </Aux>
