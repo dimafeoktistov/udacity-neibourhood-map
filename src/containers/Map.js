@@ -1,11 +1,11 @@
-import React from 'react';
-import MapCanvas from '../components/MapCanvas.js';
+import React from "react";
+import MapCanvas from "../components/MapCanvas.js";
 
 class Map extends React.Component {
-  render() {
+  render(props) {
     return (
       <div>
-        <MapCanvas />
+        <MapCanvas places={this.props.places} />
       </div>
     );
   }
