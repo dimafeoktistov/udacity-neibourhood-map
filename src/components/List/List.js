@@ -3,6 +3,8 @@ import Aux from '../../HOCs/Aux/Aux';
 import './List.css';
 
 const List = props => {
+  const { places, query, selectPlace } = props;
+
   return (
     <Aux>
       <div className="search_bar">
@@ -10,16 +12,18 @@ const List = props => {
           type="text"
           aria-label="Filter Input"
           placeholder="Filter Places"
+          onChange={event => query(event.target.value)}
         />
       </div>
       <div className="search_results">
         <ul>
-          {props.places.map(place => (
+          {places.map(place => (
             <li
               tabIndex="0"
               aria-label={place.name}
               key={place.id}
-              className="place_list">
+              className="place_list"
+              onClick={() => selectPlace(place.id)}>
               <span className="place_name">{place.name}</span>
             </li>
           ))}

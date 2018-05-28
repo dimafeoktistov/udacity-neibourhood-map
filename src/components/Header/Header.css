@@ -1,0 +1,24 @@
+.App-header {
+  display: flex;
+  justify-content: center;
+  background-color: #222;
+  padding: 10px;
+  color: white;
+}
+
+.App-title {
+  text-align: center;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.Title {
+  margin-left: 10px;
+  border: 2px solid white;
+  width: 70%;
+}
+
+.Burger {
+  border: 2px solid white;
+  text-align: left;
+}
