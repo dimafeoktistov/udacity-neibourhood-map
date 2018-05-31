@@ -5,7 +5,7 @@ import Layout from './HOCs/Layout/Layout';
 import axios from 'axios';
 import List from './components/List/List.js';
 import Map from './containers/Map.js';
-import Sidebar from 'react-sidebar';
+import Drawer from 'react-motion-drawer';
 
 const SEARCH_STRING =
   'search?ll=56.488,84.98&query=&radius=3000&categoryId=4d4b7104d754a06370d81259&client_id=TUJ2XFDBJ1A514DNTUSTFPFCWKFMJGGBJVEELJLWEC3M2NXN&client_secret=FGZQ5WAJZ1FNMQHROFE10Z5EIHSUDGZPDVLP1OCOGQIITE03&v=20201215&limit=10';
@@ -16,7 +16,7 @@ class App extends Component {
     query: '',
     selecredPlace: '',
     error: false,
-    sidebarOpen: false
+    open: false
   };
 
   componentDidMount() {
@@ -54,16 +54,28 @@ class App extends Component {
 
     return (
       <div className="App">
+        <a
+          style={{ padding: 15 }}
+          className=""
+          onClick={() => this.setState({ open: !this.state.open })}>
+          =
+        </a>
+
         <Layout>
           <Map places={filtered} selectPlace={selectedPlace} />
-          <aside>
-            <List
-              selectPlace={this.updatePlace}
-              places={filtered}
-              query={this.updateQuery}
-            />
-          </aside>
+          <aside />
         </Layout>
+
+        <Drawer
+          className="Drawer"
+          open={this.state.open}
+          onChange={open => this.setState({ open: open })}>
+          <List
+            selectPlace={this.updatePlace}
+            places={filtered}
+            query={this.updateQuery}
+          />
+        </Drawer>
       </div>
     );
   }
