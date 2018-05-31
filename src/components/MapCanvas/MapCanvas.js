@@ -7,7 +7,8 @@ import {
   Marker
 } from 'react-google-maps';
 import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
-import MapStyles from '../utils/MapStyles';
+import MapStyles from '../../utils/MapStyles';
+import './MapCanvas.css';
 
 const MapCanvas = compose(
   withProps({
@@ -57,11 +58,11 @@ const MapCanvas = compose(
               position={{ lat: place.location.lat, lng: place.location.lng }}
               animation={window.google.maps.Animation.BOUNCE}>
               <InfoBox>
-                <div className="info" tabIndex="0">
-                  <div className="info__name">
+                <div className="Info" tabIndex="0">
+                  <div>
                     <h3>{place.name}</h3>
                   </div>
-                  <div className="info__contact">
+                  <div>
                     <p>
                       <strong>Address</strong>
                     </p>
@@ -72,6 +73,7 @@ const MapCanvas = compose(
                       <br />
                       {place.location.formattedAddress[2]}
                     </p>
+                    <p>All data is provided by Foursquare</p>
                   </div>
                 </div>
               </InfoBox>
@@ -87,7 +89,7 @@ const MapCanvas = compose(
               lng: place.location.lng
             }}
             key={place.id}
-            animation={window.google.maps.Animation.BOUNCE}
+            animation={window.google.maps.Animation.STOP}
             onClick={() => props.onClickMarker(place.id)}
           />
         );

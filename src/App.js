@@ -5,6 +5,7 @@ import Layout from './HOCs/Layout/Layout';
 import axios from 'axios';
 import List from './components/List/List.js';
 import Map from './containers/Map.js';
+import Sidebar from 'react-sidebar';
 
 const SEARCH_STRING =
   'search?ll=56.488,84.98&query=&radius=3000&categoryId=4d4b7104d754a06370d81259&client_id=TUJ2XFDBJ1A514DNTUSTFPFCWKFMJGGBJVEELJLWEC3M2NXN&client_secret=FGZQ5WAJZ1FNMQHROFE10Z5EIHSUDGZPDVLP1OCOGQIITE03&v=20201215&limit=10';
@@ -14,7 +15,8 @@ class App extends Component {
     places: [],
     query: '',
     selecredPlace: '',
-    error: false
+    error: false,
+    sidebarOpen: false
   };
 
   componentDidMount() {

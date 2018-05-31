@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapCanvas from '../components/MapCanvas.js';
+import MapCanvas from '../components/MapCanvas/MapCanvas';
 
 class Map extends Component {
   state = {

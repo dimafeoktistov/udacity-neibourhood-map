@@ -1,0 +1,9 @@
+.infoBox {
+  width: 400px !important;
+}
+
+.Info {
+  background-color: #34485e;
+  color: #fff;
+  padding: 2em;
+}
