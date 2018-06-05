@@ -4,7 +4,7 @@ import escapeRegExp from 'escape-string-regexp';
 import Layout from './HOCs/Layout/Layout';
 import axios from 'axios';
 import List from './components/List/List.js';
-import Map from './containers/Map.js';
+import MapCanvas from './components/MapCanvas/MapCanvas';
 import Drawer from 'react-motion-drawer';
 import AsyncBoundary from './components/AsyncBoundary/AsyncBoundary';
 
@@ -16,9 +16,10 @@ class App extends Component {
   state = {
     places: [],
     query: '',
-    selecredPlace: '',
+    selectedPlace: null,
     error: false,
-    open: false
+    open: false,
+    mapDone: true
   };
 
   componentDidMount() {
@@ -38,8 +39,26 @@ class App extends Component {
     this.setState({ query: query.trim() });
   };
 
-  updatePlace = place => {
-    this.setState({ selectedPlace: place });
+  markerClicked = (event, place) => {
+    if (this.state.selectedPlace === place.id) {
+      this.setState({ selectedPlace: 0 });
+    } else {
+      this.setState({ selectedPlace: place.id });
+    }
+  };
+
+  infoBoxClosedHandler = () => {
+    this.setState({
+      selectedPlace: 0
+    });
+  };
+
+  onLoadMapHandler = map => {
+    if (!map) {
+      this.setState({
+        mapDone: false
+      });
+    }
   };
 
   openDrawer = () => {
@@ -57,19 +76,29 @@ class App extends Component {
       filtered = places;
     }
 
+    let mapKeeper = <AsyncBoundary />;
+    if (this.state.mapDone) {
+      mapKeeper = (
+        <MapCanvas
+          onLoadMap={this.onLoadMapHandler}
+          infoBoxClosed={this.infoBoxClosedHandler}
+          places={filtered}
+          selectedPlace={selectedPlace}
+          markerClicked={this.markerClicked}
+        />
+      );
+    }
+
     if (!error) {
       return (
         <div className="App">
-          <Layout burgerClicked={this.openDrawer}>
-            <Map places={filtered} selectPlace={selectedPlace} />
-          </Layout>
-
+          <Layout burgerClicked={this.openDrawer}>{mapKeeper}</Layout>
           <Drawer
             className="Drawer"
             open={this.state.open}
             onChange={open => this.setState({ open: open })}>
             <List
-              selectPlace={this.updatePlace}
+              listElementClicked={this.markerClicked}
               places={filtered}
               query={this.updateQuery}
             />

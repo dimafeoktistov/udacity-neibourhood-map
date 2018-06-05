@@ -50,14 +50,23 @@ const MapCanvas = compose(
       defaultOptions={{
         styles: MapStyles
       }}>
-      {props.detail
-        ? props.detail.map(place => (
-            <Marker
-              tabIndex="0"
-              key={place.id}
-              position={{ lat: place.location.lat, lng: place.location.lng }}
-              animation={window.google.maps.Animation.BOUNCE}>
-              <InfoBox>
+      {props.places.map(place => {
+        let animation = null;
+        if (place.id === props.selectedPlace) {
+          animation = window.google.maps.Animation.BOUNCE;
+        }
+
+        return (
+          <Marker
+            key={place.id}
+            position={{ lat: place.location.lat, lng: place.location.lng }}
+            onClick={event => {
+              props.markerClicked(event, place);
+            }}
+            title={place.title}
+            animation={animation}>
+            {place.id === props.selectedPlace && (
+              <InfoBox onCloseClick={() => props.infoBoxClosed()}>
                 <div className="Info" tabIndex="0">
                   <div>
                     <h3>{place.name}</h3>
@@ -77,21 +86,8 @@ const MapCanvas = compose(
                   </div>
                 </div>
               </InfoBox>
-            </Marker>
-          ))
-        : null}
-
-      {props.places.map(place => {
-        return (
-          <Marker
-            position={{
-              lat: place.location.lat,
-              lng: place.location.lng
-            }}
-            key={place.id}
-            animation={window.google.maps.Animation.STOP}
-            onClick={() => props.onClickMarker(place.id)}
-          />
+            )}
+          </Marker>
         );
       })}
     </GoogleMap>
@@ -99,5 +95,3 @@ const MapCanvas = compose(
 });
 
 export default MapCanvas;
-
-// animation={window.google.maps.Animation.DROP}

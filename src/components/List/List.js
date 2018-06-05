@@ -3,28 +3,31 @@ import Aux from '../../HOCs/Aux/Aux';
 import './List.css';
 
 const List = props => {
-  const { places, query, selectPlace } = props;
+  const { places, query, listElementClicked } = props;
 
   return (
     <Aux>
       <h2>List of places</h2>
-      <div className="search_bar">
+      <form role="search">
         <input
-          type="text"
-          aria-label="Filter Input"
+          type="search"
+          aria-label="search text"
           placeholder="Filter Places"
           onChange={event => query(event.target.value)}
         />
-      </div>
+      </form>
       <div className="search_results">
-        <ul>
+        <ul
+          className="list-of-places"
+          title="Places of interest"
+          aria-label="Places of interest">
           {places.map(place => (
             <li
               tabIndex="0"
               aria-label={place.name}
               key={place.id}
               className="place_list"
-              onClick={() => selectPlace(place.id)}>
+              onClick={event => listElementClicked(event, place)}>
               <span className="place_name">{place.name}</span>
             </li>
           ))}
