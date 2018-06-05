@@ -7,6 +7,7 @@ const List = props => {
 
   return (
     <Aux>
+      <h2>List of places</h2>
       <div className="search_bar">
         <input
           type="text"
@@ -34,6 +35,3 @@ const List = props => {
 };
 
 export default List;
-
-/*onChange={event => query(event.target.value)}*/
-/*onClick={() => selectPlace(place.id)}*/

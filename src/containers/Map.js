@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MapCanvas from '../components/MapCanvas/MapCanvas';
+import AsyncBoundary from '../components/AsyncBoundary/AsyncBoundary';
 
 class Map extends Component {
   state = {
@@ -35,16 +36,19 @@ class Map extends Component {
       renderPlaces = places;
     }
 
-    return (
-      <div>
+    if (this.state.mapDone) {
+      return (
         <MapCanvas
           onLoadMap={this.onLoadMapHandler}
           onClickMarker={this.markerClickHandler}
           detail={selectedPlaceDetails}
           places={renderPlaces}
+          role="application"
         />
-      </div>
-    );
+      );
+    } else {
+      return <AsyncBoundary />;
+    }
   }
 }
 

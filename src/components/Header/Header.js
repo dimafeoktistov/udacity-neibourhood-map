@@ -1,10 +1,12 @@
 import React from 'react';
 import './Header.css';
+import DrawerToggle from '../DrawerToggle/DrawerToggle';
 
-const Header = () => {
+const Header = props => {
   return (
     <header className="App-header">
-      <div className="Burger">Sidedrawer</div>
+      <DrawerToggle burgerClicked={props.burgerClicked} />
+
       <div className="Title">
         <h1 className="App-title">Guide to Tomsk</h1>
       </div>

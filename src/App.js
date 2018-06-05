@@ -6,9 +6,10 @@ import axios from 'axios';
 import List from './components/List/List.js';
 import Map from './containers/Map.js';
 import Drawer from 'react-motion-drawer';
+import AsyncBoundary from './components/AsyncBoundary/AsyncBoundary';
 
 const SEARCH_STRING =
-  'search?ll=56.488,84.98&query=&radius=3000&categoryId=4d4b7104d754a06370d81259&client_id=TUJ2XFDBJ1A514DNTUSTFPFCWKFMJGGBJVEELJLWEC3M2NXN&client_secret=FGZQ5WAJZ1FNMQHROFE10Z5EIHSUDGZPDVLP1OCOGQIITE03&v=20201215&limit=10';
+  'search?ll=56.488,84.98&query=&radius=3000&categoryId=4d4b7104d754a06370d81259&client_id=TUJ2XFDBJ1A514DNTUSTFPFCWKFMJGGBJVEELJLWEC3M2NXN&client_secret=FGZQ5WAJZ1FNMQHROFE10Z5EIHSUDGZPDVLP1OCOGQIITE03&v=20201215&limit=50';
 
 class App extends Component {
   state = {
@@ -25,10 +26,8 @@ class App extends Component {
       .then(res => {
         const places = res.data.response.venues;
         this.setState({ places: places });
-        console.log(res.data.response.venues);
       })
       .catch(err => {
-        console.log('err', err);
         this.setState({ error: true });
       });
   }
@@ -39,6 +38,10 @@ class App extends Component {
 
   updatePlace = place => {
     this.setState({ selectedPlace: place });
+  };
+
+  openDrawer = () => {
+    this.setState({ open: !this.state.open });
   };
 
   render() {
@@ -52,32 +55,32 @@ class App extends Component {
       filtered = places;
     }
 
-    return (
-      <div className="App">
-        <a
-          style={{ padding: 15 }}
-          className=""
-          onClick={() => this.setState({ open: !this.state.open })}>
-          =
-        </a>
+    if (!this.state.error) {
+      return (
+        <div className="App">
+          <Layout burgerClicked={this.openDrawer}>
+            <Map places={filtered} selectPlace={selectedPlace} />
+          </Layout>
 
+          <Drawer
+            className="Drawer"
+            open={this.state.open}
+            onChange={open => this.setState({ open: open })}>
+            <List
+              selectPlace={this.updatePlace}
+              places={filtered}
+              query={this.updateQuery}
+            />
+          </Drawer>
+        </div>
+      );
+    } else {
+      return (
         <Layout>
-          <Map places={filtered} selectPlace={selectedPlace} />
-          <aside />
+          <AsyncBoundary />
         </Layout>
-
-        <Drawer
-          className="Drawer"
-          open={this.state.open}
-          onChange={open => this.setState({ open: open })}>
-          <List
-            selectPlace={this.updatePlace}
-            places={filtered}
-            query={this.updateQuery}
-          />
-        </Drawer>
-      </div>
-    );
+      );
+    }
   }
 }
 
