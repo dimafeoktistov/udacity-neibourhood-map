@@ -8,6 +8,7 @@ import Map from './containers/Map.js';
 import Drawer from 'react-motion-drawer';
 import AsyncBoundary from './components/AsyncBoundary/AsyncBoundary';
 
+// Constant string that holds search query for API in order to get list of places
 const SEARCH_STRING =
   'search?ll=56.488,84.98&query=&radius=3000&categoryId=4d4b7104d754a06370d81259&client_id=TUJ2XFDBJ1A514DNTUSTFPFCWKFMJGGBJVEELJLWEC3M2NXN&client_secret=FGZQ5WAJZ1FNMQHROFE10Z5EIHSUDGZPDVLP1OCOGQIITE03&v=20201215&limit=50';
 
@@ -21,6 +22,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    //Using axios for handling AJAX requests to get places from API
     axios
       .get(SEARCH_STRING)
       .then(res => {
@@ -45,7 +47,7 @@ class App extends Component {
   };
 
   render() {
-    const { query, places, selectedPlace } = this.state;
+    const { query, places, selectedPlace, error } = this.state;
     let filtered;
 
     if (query) {
@@ -55,7 +57,7 @@ class App extends Component {
       filtered = places;
     }
 
-    if (!this.state.error) {
+    if (!error) {
       return (
         <div className="App">
           <Layout burgerClicked={this.openDrawer}>
@@ -76,9 +78,22 @@ class App extends Component {
       );
     } else {
       return (
-        <Layout>
-          <AsyncBoundary />
-        </Layout>
+        <div className="App">
+          <Layout burgerClicked={this.openDrawer}>
+            <AsyncBoundary />
+          </Layout>
+
+          <Drawer
+            className="Drawer"
+            open={this.state.open}
+            onChange={open => this.setState({ open: open })}>
+            <List
+              selectPlace={this.updatePlace}
+              places={filtered}
+              query={this.updateQuery}
+            />
+          </Drawer>
+        </div>
       );
     }
   }

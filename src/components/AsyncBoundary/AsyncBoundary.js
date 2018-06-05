@@ -4,10 +4,10 @@ import './AsyncBoundary.css';
 const AsyncBoundary = props => {
   return (
     <div className="Error">
-      <h2>Not available at moment</h2>
+      <h2>Not available at the moment</h2>
       <p>
         The page you are looking for is not available at the moment. You either
-        offline or external servers not responding.
+        offline or external servers are not responding.
       </p>
     </div>
   );
