@@ -35,6 +35,14 @@ class App extends Component {
       });
   }
 
+  onLoadMapHandler = map => {
+    if (!map) {
+      this.setState({
+        mapLoaded: false
+      });
+    }
+  };
+
   updateQuery = query => {
     this.setState({ query: query.trim() });
   };
@@ -51,14 +59,6 @@ class App extends Component {
     this.setState({
       selectedPlace: 0
     });
-  };
-
-  onLoadMapHandler = map => {
-    if (!map) {
-      this.setState({
-        mapDone: false
-      });
-    }
   };
 
   openDrawer = () => {
