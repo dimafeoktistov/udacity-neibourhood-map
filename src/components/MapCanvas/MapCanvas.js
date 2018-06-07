@@ -41,7 +41,6 @@ const MapCanvas = compose(
 )(props => {
   return (
     <GoogleMap
-      ref={props.onLoadMap}
       defaultZoom={13}
       defaultCenter={{
         lat: 56.488,

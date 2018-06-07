@@ -18,8 +18,7 @@ class App extends Component {
     query: '',
     selectedPlace: null,
     error: false,
-    open: false,
-    mapDone: true
+    open: false
   };
 
   componentDidMount() {
@@ -34,14 +33,6 @@ class App extends Component {
         this.setState({ error: true });
       });
   }
-
-  onLoadMapHandler = map => {
-    if (!map) {
-      this.setState({
-        mapLoaded: false
-      });
-    }
-  };
 
   updateQuery = query => {
     this.setState({ query: query.trim() });
@@ -76,23 +67,20 @@ class App extends Component {
       filtered = places;
     }
 
-    let mapKeeper = <AsyncBoundary />;
-    if (this.state.mapDone) {
-      mapKeeper = (
-        <MapCanvas
-          onLoadMap={this.onLoadMapHandler}
-          infoBoxClosed={this.infoBoxClosedHandler}
-          places={filtered}
-          selectedPlace={selectedPlace}
-          markerClicked={this.markerClicked}
-        />
-      );
-    }
-
     if (!error) {
       return (
         <div className="App">
-          <Layout burgerClicked={this.openDrawer}>{mapKeeper}</Layout>
+          <Layout burgerClicked={this.openDrawer}>
+            {navigator.onLine && (
+              <MapCanvas
+                infoBoxClosed={this.infoBoxClosedHandler}
+                places={filtered}
+                selectedPlace={selectedPlace}
+                markerClicked={this.markerClicked}
+              />
+            )}
+            {!navigator.onLine && <AsyncBoundary />}
+          </Layout>
           <Drawer
             className="Drawer"
             open={this.state.open}
@@ -109,7 +97,7 @@ class App extends Component {
       return (
         <div className="App">
           <Layout burgerClicked={this.openDrawer}>
-            <AsyncBoundary />
+            <AsyncBoundary error={this.state.info} />
           </Layout>
 
           <Drawer
