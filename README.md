@@ -2,7 +2,7 @@
 
 This project is last project of Udacity FEND.
 
-The information for the places was provided by [foursquare api](https://developer.foursquare.com/places-api)
+The information for the places was provided by [foursquare api](https://developer.foursquare.com/places-api).
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
@@ -39,12 +39,12 @@ Click [here](https://udacity-neibourhood-map.firebaseapp.com) to try and use app
 
 All dependencies is listed in package.json, but here is the links to them.
 
-* [axios](https://www.npmjs.com/package/axios)
-* [escape-string-regexp](https://www.npmjs.com/package/@types/escape-string-regexp)
-* [react](https://www.npmjs.com/package/react)
-* [react-dom](https://www.npmjs.com/package/react-dom)
-* [react-google-maps](https://www.npmjs.com/package/react-google-maps)
-* [react-icons](https://www.npmjs.com/package/react-icons)
-* [react-motion-drawer](https://www.npmjs.com/package/react-motion-drawer)
-* [react-scripts](https://www.npmjs.com/package/react-scripts)
-* [recompose](https://www.npmjs.com/package/recompose)
+* [axios](https://www.npmjs.com/package/axios).
+* [escape-string-regexp](https://www.npmjs.com/package/@types/escape-string-regexp).
+* [react](https://www.npmjs.com/package/react).
+* [react-dom](https://www.npmjs.com/package/react-dom).
+* [react-google-maps](https://www.npmjs.com/package/react-google-maps).
+* [react-icons](https://www.npmjs.com/package/react-icons).
+* [react-motion-drawer](https://www.npmjs.com/package/react-motion-drawer).
+* [react-scripts](https://www.npmjs.com/package/react-scripts).
+* [recompose](https://www.npmjs.com/package/recompose).
